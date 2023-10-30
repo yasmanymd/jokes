@@ -1,6 +1,10 @@
 version: '3.8'
 
 services:
+  portal:
+    env_file:
+      - .env
+    image: jokes/portal:latest
   api:
     env_file:
       - .env

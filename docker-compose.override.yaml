@@ -1,6 +1,21 @@
 version: '3.8'
 
 services:
+  portal:
+    build:
+      context: ./portal
+    ports:
+      - 5173:5173
+    volumes:
+      - ./portal/src:/usr/src/app/src
+      - ./portal/static:/usr/src/app/static
+      - ./portal/vite.config.js:/usr/src/app/vite.config.js
+      - ./portal/tsconfig.json:/usr/src/app/tsconfig.json
+      - ./portal/svelte.config.js:/usr/src/app/svelte.config.js
+    environment:
+      - PORT=5173
+      - HOST=0.0.0.0
+
   api:
     env_file:
       - .env
