@@ -1,61 +1,84 @@
 <script>
-	import { Card, CardBody, CardTitle, Ribbon, El, Icon } from 'yesvelte';
+	import {
+		Button,
+		Card,
+		CardBody,
+		CardTitle,
+		Ribbon,
+		El,
+		Icon,
+		Table,
+		TableBody,
+		TableCell,
+		TableHead,
+		TableRow
+	} from 'yesvelte';
+	import { onMount } from 'svelte';
+
+	let randomQuote = 'Loading...';
+
+	function getRandom() {
+		fetch('http://localhost:3000/api/Jokes/GetRandom')
+			.then((response) => response.json())
+			.then((data) => {
+				randomQuote = data.value;
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	}
+
+	onMount(async () => {
+		getRandom();
+	});
 </script>
 
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<h1 style="text-align: center; margin-top: 20px; margin-bottom: 10px;">Welcome to My Example</h1>
 
-<El row>
-	<El colSm="12" colMd="6">
-		<Card>
-			<CardBody>
-				<CardTitle>Ribbon color: primary</CardTitle>
-				<p>
-					Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-					been the industry's standard dummy text ever since the 1500s, when an unknown printer took
-					a galley of type and scrambled it to make a type specimen book.
-				</p>
-			</CardBody>
-			<Ribbon bgColor="primary" elementPosition="start"><Icon name="star" color="light" /></Ribbon>
-		</Card>
-	</El>
-	<El colSm="12" colMd="6">
-		<Card>
-			<CardBody>
-				<CardTitle>Ribbon color: warning</CardTitle>
-				<p>
-					Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-					been the industry's standard dummy text ever since the 1500s, when an unknown printer took
-					a galley of type and scrambled it to make a type specimen book.
-				</p>
-			</CardBody>
-			<Ribbon bgColor="warning" elementPosition="top">New</Ribbon>
-		</Card>
-	</El>
-	<El colSm="12" colMd="6">
-		<Card>
-			<CardBody>
-				<CardTitle>Ribbon color: success</CardTitle>
-				<p>
-					Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-					been the industry's standard dummy text ever since the 1500s, when an unknown printer took
-					a galley of type and scrambled it to make a type specimen book.
-				</p>
-			</CardBody>
-			<Ribbon bgColor="success" elementPosition="end"><Icon name="bell" color="light" /></Ribbon>
-		</Card>
-	</El>
-	<El colSm="12" colMd="6">
-		<Card>
-			<Ribbon bgColor="danger" elementPosition="bottom">Hot</Ribbon>
-			<CardBody>
-				<CardTitle>Ribbon color: danger</CardTitle>
-				<p>
-					Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-					been the industry's standard dummy text ever since the 1500s, when an unknown printer took
-					a galley of type and scrambled it to make a type specimen book.
-				</p>
-			</CardBody>
-		</Card>
+<El container>
+	<El row>
+		<El col="9">
+			<Table hover>
+				<TableHead>
+					<TableRow>
+						<TableCell>Name</TableCell>
+						<TableCell>Title</TableCell>
+						<TableCell>Email</TableCell>
+						<TableCell>Role</TableCell>
+					</TableRow>
+				</TableHead>
+				<TableBody>
+					<TableRow>
+						<TableCell>Emmy Levet</TableCell>
+						<TableCell>VP Product Management, Accounting</TableCell>
+						<TableCell>elevet4@senate.gov</TableCell>
+						<TableCell>Admin</TableCell>
+					</TableRow>
+				</TableBody>
+			</Table>
+		</El>
+		<El col="3">
+			<El row>
+				<El colSm="12" colMd="12">
+					<Card>
+						<CardBody>
+							<CardTitle>Joke of Day</CardTitle>
+							<p>
+								{randomQuote}
+							</p>
+							<Button
+								color="primary"
+								on:click={async () => {
+									getRandom();
+								}}>Get another one</Button
+							>
+						</CardBody>
+						<Ribbon bgColor="success" elementPosition="end"
+							><Icon name="bell" color="light" />
+						</Ribbon>
+					</Card>
+				</El>
+			</El>
+		</El>
 	</El>
 </El>
