@@ -1,6 +1,5 @@
-<nav>
-	<a href="/">home</a>
-	<a href="/random">random</a>
-</nav>
+<svelte:head>
+	<link rel="stylesheet" href="https://unpkg.com/yesvelte@next/css/daisyui.min.css" />
+</svelte:head>
 
 <slot />

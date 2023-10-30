@@ -9,7 +9,7 @@ services:
     volumes:
       - ./portal/src:/usr/src/app/src
       - ./portal/static:/usr/src/app/static
-      - ./portal/vite.config.js:/usr/src/app/vite.config.js
+      - ./portal/vite.config.ts:/usr/src/app/vite.config.ts
       - ./portal/tsconfig.json:/usr/src/app/tsconfig.json
       - ./portal/svelte.config.js:/usr/src/app/svelte.config.js
     environment:

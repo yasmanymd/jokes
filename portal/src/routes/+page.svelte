@@ -1,15 +1,61 @@
-<section>
-	<div style="display: flex;">
-		<div class="card" style="width: 80%;" />
-		<div class="card" style="width: 20%;">Prueba</div>
-	</div>
-</section>
+<script>
+	import { Card, CardBody, CardTitle, Ribbon, El, Icon } from 'yesvelte';
+</script>
 
-<style>
-	.card {
-		margin: 10px;
-		padding: 10px;
-		border-radius: 10px;
-		background-color: cornflowerblue;
-	}
-</style>
+<h1>Welcome to SvelteKit</h1>
+<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+
+<El row>
+	<El colSm="12" colMd="6">
+		<Card>
+			<CardBody>
+				<CardTitle>Ribbon color: primary</CardTitle>
+				<p>
+					Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
+					been the industry's standard dummy text ever since the 1500s, when an unknown printer took
+					a galley of type and scrambled it to make a type specimen book.
+				</p>
+			</CardBody>
+			<Ribbon bgColor="primary" elementPosition="start"><Icon name="star" color="light" /></Ribbon>
+		</Card>
+	</El>
+	<El colSm="12" colMd="6">
+		<Card>
+			<CardBody>
+				<CardTitle>Ribbon color: warning</CardTitle>
+				<p>
+					Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
+					been the industry's standard dummy text ever since the 1500s, when an unknown printer took
+					a galley of type and scrambled it to make a type specimen book.
+				</p>
+			</CardBody>
+			<Ribbon bgColor="warning" elementPosition="top">New</Ribbon>
+		</Card>
+	</El>
+	<El colSm="12" colMd="6">
+		<Card>
+			<CardBody>
+				<CardTitle>Ribbon color: success</CardTitle>
+				<p>
+					Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
+					been the industry's standard dummy text ever since the 1500s, when an unknown printer took
+					a galley of type and scrambled it to make a type specimen book.
+				</p>
+			</CardBody>
+			<Ribbon bgColor="success" elementPosition="end"><Icon name="bell" color="light" /></Ribbon>
+		</Card>
+	</El>
+	<El colSm="12" colMd="6">
+		<Card>
+			<Ribbon bgColor="danger" elementPosition="bottom">Hot</Ribbon>
+			<CardBody>
+				<CardTitle>Ribbon color: danger</CardTitle>
+				<p>
+					Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
+					been the industry's standard dummy text ever since the 1500s, when an unknown printer took
+					a galley of type and scrambled it to make a type specimen book.
+				</p>
+			</CardBody>
+		</Card>
+	</El>
+</El>
