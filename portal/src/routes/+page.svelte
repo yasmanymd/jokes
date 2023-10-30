@@ -13,9 +13,11 @@
 		TableHead,
 		TableRow
 	} from 'yesvelte';
+	import { writable } from 'svelte/store';
 	import { onMount } from 'svelte';
 
 	let randomQuote = 'Loading...';
+	let quotes = writable([]);
 
 	function getRandom() {
 		fetch('http://localhost:3000/api/Jokes/GetRandom')
@@ -28,8 +30,20 @@
 			});
 	}
 
+	function getQuotes() {
+		fetch('http://localhost:3000/api/Jokes/GetJokes')
+			.then((response) => response.json())
+			.then((data) => {
+				quotes.set(data);
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	}
+
 	onMount(async () => {
 		getRandom();
+		getQuotes();
 	});
 </script>
 
@@ -41,19 +55,19 @@
 			<Table hover>
 				<TableHead>
 					<TableRow>
-						<TableCell>Name</TableCell>
-						<TableCell>Title</TableCell>
-						<TableCell>Email</TableCell>
-						<TableCell>Role</TableCell>
+						<TableCell>Id</TableCell>
+						<TableCell>Quote</TableCell>
+						<TableCell>Created at</TableCell>
 					</TableRow>
 				</TableHead>
 				<TableBody>
-					<TableRow>
-						<TableCell>Emmy Levet</TableCell>
-						<TableCell>VP Product Management, Accounting</TableCell>
-						<TableCell>elevet4@senate.gov</TableCell>
-						<TableCell>Admin</TableCell>
-					</TableRow>
+					{#each $quotes as quote}
+						<TableRow>
+							<TableCell>{quote.id}</TableCell>
+							<TableCell>{quote.value}</TableCell>
+							<TableCell>{quote.createdAt}</TableCell>
+						</TableRow>
+					{/each}
 				</TableBody>
 			</Table>
 		</El>
